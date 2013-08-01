@@ -4,36 +4,12 @@
 #import <CoreText/CoreText.h>
 
 
-static NSString *FTFontPostscriptName = @"FTFontPostscriptName";
-static NSString *FTFontDisplayName = @"FTFontDisplayName";
-static NSString *FTFontHasFamilyMembers = @"FTFontHasFamilyMembers";
-
-
 static UIImage *
 FTFontImageNamed(NSString *imageName)
 {
   NSString *name = @"FTFontSelectorController.bundle";
   name = [name stringByAppendingPathComponent:imageName];
   return [UIImage imageNamed:name];
-}
-
-// TODO figure out how to generate this with CoreText if that's more efficient.
-static NSArray *
-FTFontFamilyNames()
-{
-  NSArray *names = [UIFont familyNames];
-  names = [names sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-  NSMutableArray *families = [NSMutableArray arrayWithCapacity:names.count];
-  for (NSString *name in names) {
-    NSString *postscriptName = [[UIFont fontWithName:name size:0] fontName];
-    NSArray *familyMembers = [UIFont fontNamesForFamilyName:name];
-    [families addObject:@{
-      FTFontPostscriptName:postscriptName,
-      FTFontDisplayName:name,
-      FTFontHasFamilyMembers:@(familyMembers.count > 1),
-    }];
-  }
-  return [families copy];
 }
 
 // +[UIFont fontNamesForFamilyName:] returns a sort order different from what

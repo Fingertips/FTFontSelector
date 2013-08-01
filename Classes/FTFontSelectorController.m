@@ -8,6 +8,27 @@
 
 #import "FTFontSelectorController.h"
 #import "FTFontSelectorController+Private.h"
+#import "FTFontNamesViewController.h"
+
+
+// TODO figure out how to generate this with CoreText if that's more efficient.
+static NSArray *
+FTFontFamilyNames()
+{
+  NSArray *names = [UIFont familyNames];
+  names = [names sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+  NSMutableArray *families = [NSMutableArray arrayWithCapacity:names.count];
+  for (NSString *name in names) {
+    NSString *postscriptName = [[UIFont fontWithName:name size:0] fontName];
+    NSArray *familyMembers = [UIFont fontNamesForFamilyName:name];
+    [families addObject:@{
+      FTFontPostscriptName:postscriptName,
+      FTFontDisplayName:name,
+      FTFontHasFamilyMembers:@(familyMembers.count > 1),
+    }];
+  }
+  return [families copy];
+}
 
 @implementation FTFontSelectorController
 

@@ -1,4 +1,5 @@
 #import <UIKit/UIKit.h>
+#import "FTFontSelectorController.h"
 
 @interface FTFontNamesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
