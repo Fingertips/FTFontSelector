@@ -6,12 +6,19 @@
 FTFontSelector implements a clone of the font selector that can be found in
 Apple’s iOS Pages application.
 
-![iPhone Font Families](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPhone%20Font%20Families.png) &nbsp; ![iPhone Font Family Members](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPhone%20Font%20Family%20Members.png)
-
-![iPad Font Families](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPad%20Font%20Families%20Small.png) &nbsp; ![iPad Font Family Members](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPad%20Font%20Family%20Members%20Small.png)
-
 For now it targets the current iOS 6 look, because we won’t know what Apple’s
 version in iOS 7 will look like yet.
+
+
+## Screenshots
+
+#### iPhone
+
+![iPhone Font Families](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPhone%20Font%20Families.png) &nbsp; ![iPhone Font Family Members](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPhone%20Font%20Family%20Members.png)
+
+#### iPad
+
+![iPad Font Families](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPad%20Font%20Families%20Small.png) &nbsp; ![iPad Font Family Members](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPad%20Font%20Family%20Members%20Small.png)
 
 
 ## Usage
