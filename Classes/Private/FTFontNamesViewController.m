@@ -7,7 +7,7 @@
 static UIImage *
 FTFontImageNamed(NSString *imageName)
 {
-  NSString *name = @"FTFontSelectorController.bundle";
+  NSString *name = @"FTFontSelector.bundle";
   name = [name stringByAppendingPathComponent:imageName];
   return [UIImage imageNamed:name];
 }
