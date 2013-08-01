@@ -12,7 +12,11 @@
 
 @end
 
+/**
 
+  `FTFontSelectorController` implements a 
+
+ */
 @interface FTFontSelectorController : UINavigationController
 
 @property (weak) id<FTFontSelectorControllerDelegate> fontDelegate;
