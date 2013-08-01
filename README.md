@@ -14,6 +14,10 @@ it simply add the following line to your Podfile:
 
     pod "FTFontSelector"
 
+Alternatively, add all the source files in `Classes` and the resource bundle at
+`Assets/FTFontSelector.bundle` to your Xcode project and add `CoreText` to the
+‘frameworks build phase’.
+
 ## Author
 
 Eloy Durán, eloy.de.enige@gmail.com
