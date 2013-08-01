@@ -1,15 +1,9 @@
-//
-//  FTViewController.m
-//  FTFontSelector Example
-//
-//  Created by Eloy Durán on 01/08/13.
-//  Copyright (c) 2013 Fingertips BV. All rights reserved.
-//
-
 #import "FTViewController.h"
 #import <FTFontSelector/FTFontSelectorController.h>
 
+
 #define FONT_SIZE 80
+
 
 @interface FTViewController () <UIPopoverControllerDelegate, FTFontSelectorControllerDelegate>
 @property (strong) UITextView *textView;

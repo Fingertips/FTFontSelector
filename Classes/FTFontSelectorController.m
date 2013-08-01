@@ -1,11 +1,3 @@
-//
-//  FTFontSelectorController.m
-//
-//  Created by Eloy Durán on 7/26/13.
-//  Copyright (c) 2013 Eloy Durán <eloy.de.enige@gmail.com>. All rights reserved.
-//
-//  Note: this will be extracted as a standalone OSS lib.
-
 #import "FTFontSelectorController.h"
 #import "FTFontSelectorController+Private.h"
 #import "FTFontNamesViewController.h"
