@@ -9,14 +9,14 @@
 
 ## Installation
 
-FTFontSelector is available with CocoaPods[http://cocoapods.org], to install
-simply add the following line to your Podfile:
+FTFontSelector is available through [CocoaPods](http://cocoapods.org), to install
+it simply add the following line to your Podfile:
 
     pod FTFontSelector
 
 ## Author
 
-Eloy Durán <eloy.de.enige@gmail.com>
+Eloy Durán, eloy.de.enige@gmail.com
 
 ## License
 
