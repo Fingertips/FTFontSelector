@@ -1,40 +1,16 @@
 #import "FTFontSelectorController.h"
-#import "FTFontSelectorController+Private.h"
-#import "FTFontNamesViewController.h"
+#import "FTFontFamiliesViewController.h"
 
-
-// TODO figure out how to generate this with CoreText if that's more efficient.
-static NSArray *
-FTFontFamilyNames()
-{
-  NSArray *names = [UIFont familyNames];
-  names = [names sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-  NSMutableArray *families = [NSMutableArray arrayWithCapacity:names.count];
-  for (NSString *name in names) {
-    NSString *postscriptName = [[UIFont fontWithName:name size:0] fontName];
-    NSArray *familyMembers = [UIFont fontNamesForFamilyName:name];
-    [families addObject:@{
-      FTFontPostscriptName:postscriptName,
-      FTFontDisplayName:name,
-      FTFontHasFamilyMembers:@(familyMembers.count > 1),
-    }];
-  }
-  return [families copy];
-}
+@interface FTFontSelectorController () <FTFontSelectorControllerDelegate>
+@property (strong) NSString *selectedFontName;
+@end
 
 @implementation FTFontSelectorController
 
 - (instancetype)initWithSelectedFontName:(NSString *)fontName;
 {
-  FTFontNamesViewController *controller = [FTFontNamesViewController new];
-  controller.title = NSLocalizedString(@"Fonts", nil);
-  controller.fontNames = FTFontFamilyNames();
+  FTFontFamiliesViewController *controller = [FTFontFamiliesViewController new];
   controller.fontSelectorController = self;
-  // Only on the iPad and only in the main list of families does the popover
-  // dismiss when changing selection. This does NOT mean tapping the disclosure
-  // button.
-  controller.dismissOnSelection = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
-
   if ((self = [super initWithRootViewController:controller])) {
     _selectedFontName = fontName;
     _showsDismissButton = YES;
@@ -42,14 +18,15 @@ FTFontFamilyNames()
   return self;
 }
 
-- (void)changeSelectedFontName:(NSString *)postscriptName;
+- (void)fontSelectorController:(id)_
+     didChangeSelectedFontName:(NSString *)postscriptName;
 {
   self.selectedFontName = postscriptName;
   [self.fontDelegate fontSelectorController:self
                   didChangeSelectedFontName:self.selectedFontName];
 }
 
-- (void)dismissFontSelector;
+- (void)fontSelectorControllerShouldBeDismissed:(id)_;
 {
   [self.fontDelegate fontSelectorControllerShouldBeDismissed:self];
 }

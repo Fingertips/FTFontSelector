@@ -6,11 +6,12 @@
 @protocol FTFontSelectorControllerDelegate <NSObject>
 
 - (void)fontSelectorController:(FTFontSelectorController *)controller
-     didChangeSelectedFontName:(NSString *)fontName;
+     didChangeSelectedFontName:(NSString *)postscriptName;
 
 - (void)fontSelectorControllerShouldBeDismissed:(FTFontSelectorController *)controller;
 
 @end
+
 
 @interface FTFontSelectorController : UINavigationController
 
