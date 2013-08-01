@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  FTFontSelector: e56cce26c1fc6294b32ff052b37ad204cd6cb08d
+  FTFontSelector: c5280f28dcb4473a8319698aa548f87ff2de9fc8
 
 COCOAPODS: 0.22.3
