@@ -23,6 +23,9 @@
 
 @property (weak) id<FTFontSelectorControllerDelegate> fontDelegate;
 
+// This only applies on iPhone. Defaults to YES.
+@property (assign) BOOL showsDismissButton;
+
 // The postscript name of the font.
 @property (readonly) NSString *selectedFontName;
 
@@ -30,3 +33,4 @@
 - (instancetype)initWithSelectedFontName:(NSString *)fontName;
 
 @end
+

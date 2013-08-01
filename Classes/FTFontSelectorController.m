@@ -15,6 +15,14 @@ static NSString *FTFontDisplayName = @"FTFontDisplayName";
 static NSString *FTFontHasFamilyMembers = @"FTFontHasFamilyMembers";
 
 
+static UIImage *
+FTFontImageNamed(NSString *imageName)
+{
+  NSString *name = @"FTFontSelectorController.bundle";
+  name = [name stringByAppendingPathComponent:imageName];
+  return [UIImage imageNamed:name];
+}
+
 // TODO figure out how to generate this with CoreText if that's more efficient.
 static NSArray *
 FTFontFamilyNames()
@@ -90,8 +98,9 @@ FTFontFamilyMemberNames(NSString *familyName)
 @end
 
 
-@interface FTFontNamesViewController : UITableViewController
+@interface FTFontNamesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (strong) NSArray *fontNames;
+@property (strong) UITableView *tableView;
 @property (assign) NSInteger currentSelectedFontIndex;
 @property (weak) FTFontSelectorController *fontSelectorController;
 @property (assign) BOOL dismissOnSelection;
@@ -110,20 +119,32 @@ FTFontFamilyMemberNames(NSString *familyName)
   return self;
 }
 
-- (void)viewDidLoad;
+- (void)loadView;
 {
-  [super viewDidLoad];
+  self.tableView = [UITableView new];
+  self.tableView.dataSource = self;
+  self.tableView.delegate = self;
+  self.view = self.tableView;
+
   [self updateCurrentSelectedFontIndex];
-  self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"FTFontSelectorController.bundle/ArrowDown"]
-                                                                            style:UIBarButtonItemStyleBordered
-                                                                           target:self.fontSelectorController
-                                                                           action:@selector(dismissFontSelector)];
+  [self.tableView reloadData];
+
+  if (self.fontSelectorController.showsDismissButton &&
+        UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    UIBarButtonItem *button = [[UIBarButtonItem alloc] initWithImage:FTFontImageNamed(@"ArrowDown")
+                                                               style:UIBarButtonItemStyleBordered
+                                                              target:self.fontSelectorController
+                                                              action:@selector(dismissFontSelector)];
+    self.navigationItem.rightBarButtonItem = button;
+  }
 }
 
 - (void)viewWillAppear:(BOOL)animated;
 {
   [super viewWillAppear:animated];
-  [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentSelectedFontIndex inSection:0]
+  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.currentSelectedFontIndex
+                                              inSection:0];
+  [self.tableView scrollToRowAtIndexPath:indexPath
                         atScrollPosition:UITableViewScrollPositionMiddle
                                 animated:NO];
 }
@@ -179,11 +200,11 @@ FTFontFamilyMemberNames(NSString *familyName)
 - (void)updateCheckMarkOfCell:(UITableViewCell *)cell selected:(BOOL)selected;
 {
   if (selected) {
-    cell.imageView.image = [UIImage imageNamed:@"FTFontSelectorController.bundle/CheckMark"];
-    cell.imageView.highlightedImage = [UIImage imageNamed:@"FTFontSelectorController.bundle/CheckMark-White"];
+    cell.imageView.image = FTFontImageNamed(@"CheckMark");
+    cell.imageView.highlightedImage = FTFontImageNamed(@"CheckMark-White");
   } else {
-    cell.imageView.image = [UIImage imageNamed:@"FTFontSelectorController.bundle/CheckMark-Clear"];
-    cell.imageView.highlightedImage = [UIImage imageNamed:@"FTFontSelectorController.bundle/CheckMark-Clear"];
+    cell.imageView.image = FTFontImageNamed(@"CheckMark-Clear");
+    cell.imageView.highlightedImage = FTFontImageNamed(@"CheckMark-Clear");
   }
 }
 
@@ -273,6 +294,7 @@ FTFontFamilyMemberNames(NSString *familyName)
 
   if ((self = [super initWithRootViewController:controller])) {
     _selectedFontName = fontName;
+    _showsDismissButton = YES;
   }
   return self;
 }
@@ -299,3 +321,4 @@ FTFontFamilyMemberNames(NSString *familyName)
 }
 
 @end
+
