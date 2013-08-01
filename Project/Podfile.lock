@@ -1,0 +1,14 @@
+PODS:
+  - FTFontSelector (0.1.0)
+
+DEPENDENCIES:
+  - FTFontSelector (from `../`)
+
+EXTERNAL SOURCES:
+  FTFontSelector:
+    :path: ../
+
+SPEC CHECKSUMS:
+  FTFontSelector: e56cce26c1fc6294b32ff052b37ad204cd6cb08d
+
+COCOAPODS: 0.22.3
