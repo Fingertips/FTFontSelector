@@ -3,6 +3,12 @@ task :spec do
   # Provide your own implementation
 end
 
+desc "Generate documentation"
+task :doc do
+  system "appledoc --project-name '#{spec.name}' --project-company 'Fingertips' --company-id com.fngtps --keep-undocumented-objects --keep-undocumented-members --no-create-docset --create-html --output Doc --index-desc README.md Classes/FTFontSelectorController.h"
+  system "open Doc/html/index.html"
+end
+
 desc "Release a new version of the Pod"
 task :release do
 
@@ -12,17 +18,15 @@ task :release do
       exit 1
     end
 
-    if `git tag`.strip.split("\n").include?(spec_version)
-      $stderr.puts "[!] A tag for version `#{spec_version}' already exists. Change the version in the podspec"
+    if `git tag`.strip.split("\n").include?(spec.version)
+      $stderr.puts "[!] A tag for version `#{spec.version}' already exists. Change the version in the podspec"
       exit 1
     end
 
-    puts "You are about to release `#{spec_version}`, is that correct? [y/n]"
+    puts "You are about to release `#{spec.version}`, is that correct? [y/n]"
     exit if $stdin.gets.strip.downcase != 'y'
 
     diff_lines = `git diff --name-only`.strip.split("\n")
-
-
     diff_lines.delete('CHANGELOG.md')
     if diff_lines != [podspec_path]
       $stderr.puts "[!] Only change the version number in a release commit!"
@@ -37,19 +41,18 @@ task :release do
   sh "pod lib lint"
 
   # Then release
-  sh "git commit lib/cocoapods/gem_version.rb CHANGELOG.md -m 'Release #{spec_version}'"
-  sh "git tag -a #{spec_version} -m 'Release #{spec_version}'"
+  sh "git commit lib/cocoapods/gem_version.rb CHANGELOG.md -m 'Release #{spec.version}'"
+  sh "git tag -a #{spec.version} -m 'Release #{spec.version}'"
   sh "git push origin master"
   sh "git push origin --tags"
   sh "pod push #{podspec_path}"
 end
 
-# @return [Pod::Version] The version as reported by the Podspec.
+# @return [Pod::Specification] The Podspec.
 #
-def spec_version
+def spec
   require 'cocoapods'
-  spec = Pod::Specification.from_file(podspec_path)
-  spec.version
+  @spec ||= Pod::Specification.from_file(podspec_path)
 end
 
 # @return [String] The relative path of the Podspec.

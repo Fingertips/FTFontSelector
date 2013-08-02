@@ -71,9 +71,9 @@
       self.fontSelectorController = [self createFontController];
       // self.fontSelectorController.showsDismissButton = NO;
 
-      // self.fontSelectorController.navigationBar.barStyle = UIBarStyleBlack;
-      UIColor *cherryBlossomPink = [UIColor colorWithRed:1 green:197.0/255.0 blue:183.0/255.0 alpha:1];
-      self.fontSelectorController.navigationBar.tintColor = cherryBlossomPink;
+      self.fontSelectorController.navigationBar.barStyle = UIBarStyleDefault;
+      // UIColor *cherryBlossomPink = [UIColor colorWithRed:1 green:197.0/255.0 blue:183.0/255.0 alpha:1];
+      // self.fontSelectorController.navigationBar.tintColor = cherryBlossomPink;
 
       // HACK: To ensure the toolbar is still shown:
       // 

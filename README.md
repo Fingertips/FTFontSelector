@@ -6,19 +6,8 @@
 FTFontSelector implements a clone of the font selector that can be found in
 Apple’s iOS Pages application.
 
-For now it targets the current iOS 6 look, because we won’t know what Apple’s
-version in iOS 7 will look like yet.
-
-
-## Screenshots
-
-#### iPhone
-
-![iPhone Font Families](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPhone%20Font%20Families.png) &nbsp; ![iPhone Font Family Members](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPhone%20Font%20Family%20Members.png)
-
-#### iPad
-
-![iPad Font Families](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPad%20Font%20Families%20Small.png) &nbsp; ![iPad Font Family Members](https://raw.github.com/Fingertips/FTFontSelector/master/Project/Screenshots/iPad%20Font%20Family%20Members%20Small.png)
+**Note:** _For now it targets the current iOS 6 look, because we won’t know
+what Apple’s version in iOS 7 will look like yet._
 
 
 ## Usage
@@ -26,15 +15,6 @@ version in iOS 7 will look like yet.
 The one exposed class that you need to work with is `FTFontSelectorController`.
 This class is a self contained `UINavigationController` subclass that provides
 all the required features.
-
-To use it on the iPhone, it’s common to add the controller instance as a child
-view controller in the same place that the keyboard is normally shown. On iPad
-it’s common to show the controller in a `UIPopoverController`.
-
-See the example app in `Project` for examples on both devices. Note that the
-iPhone version uses a bit of a hack by adding the view to the `UITextView`’s
-`inputView`. In Pages the keyboard is actually dismissed beforehand, so keep
-this in mind.
 
 
 ## Installation
@@ -56,5 +36,5 @@ Eloy Durán, eloy.de.enige@gmail.com
 
 ## License
 
-FTFontSelector is available under the MIT license. See the LICENSE file for
-more info.
+FTFontSelector is available under the MIT license. See [the LICENSE file](https://raw.github.com/Fingertips/FTFontSelector/master/LICENSE)
+for more info.

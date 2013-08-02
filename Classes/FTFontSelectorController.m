@@ -9,6 +9,7 @@
 
 - (instancetype)initWithSelectedFontName:(NSString *)fontName;
 {
+  NSParameterAssert(fontName);
   FTFontFamiliesViewController *controller = [FTFontFamiliesViewController new];
   controller.fontSelectorController = self;
   if ((self = [super initWithRootViewController:controller])) {
