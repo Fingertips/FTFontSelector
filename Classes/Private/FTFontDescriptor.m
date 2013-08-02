@@ -115,13 +115,8 @@
                                                                           kCTFontSubFamilyNameKey,
                                                                           NULL);
       CFRelease(font);
-
-      if ([self.postscriptName isEqualToString:postscriptName]) {
-        [members addObject:self];
-      } else {
-        [members addObject:[[FTFontDescriptor alloc] initWithPostscriptName:postscriptName
-                                                                displayName:displayName]];
-      }
+      [members addObject:[[FTFontDescriptor alloc] initWithPostscriptName:postscriptName
+                                                              displayName:displayName]];
     }
 
     CFRelease(descriptors);
