@@ -29,9 +29,6 @@ task :release do
     end
   end
 
-  puts "* Running specs"
-  sh "rake spec"
-
   puts "* Linting the podspec"
   sh "pod lib lint"
 
@@ -40,7 +37,7 @@ task :release do
   sh "git tag -a #{spec.version} -m 'Release #{spec.version}'"
   sh "git push origin master"
   sh "git push origin --tags"
-  sh "pod push #{podspec_path}"
+  sh "pod push master #{podspec_path}"
 end
 
 # @return [Pod::Specification] The Podspec.
