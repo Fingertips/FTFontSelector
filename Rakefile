@@ -1,8 +1,3 @@
-desc "Runs the specs [EMPTY]"
-task :spec do
-  # Provide your own implementation
-end
-
 desc "Generate documentation"
 task :doc do
   system "appledoc --project-name '#{spec.name}' --project-company 'Fingertips' --company-id com.fngtps --keep-undocumented-objects --keep-undocumented-members --no-create-docset --create-html --output Doc --index-desc README.md Classes/FTFontSelectorController.h"
