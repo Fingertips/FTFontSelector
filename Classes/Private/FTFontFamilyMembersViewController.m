@@ -84,6 +84,7 @@ FTFontImageNamed(NSString *imageName)
     cell.imageView.image = FTFontImageNamed(@"CheckMark");
     cell.imageView.highlightedImage = FTFontImageNamed(@"CheckMark-White");
   } else {
+    // lazy lulz
     cell.imageView.image = FTFontImageNamed(@"CheckMark-Clear");
     cell.imageView.highlightedImage = FTFontImageNamed(@"CheckMark-Clear");
   }
