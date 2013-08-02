@@ -33,7 +33,7 @@ task :release do
   sh "pod lib lint"
 
   # Then release
-  sh "git commit lib/cocoapods/gem_version.rb CHANGELOG.md -m 'Release #{spec.version}'"
+  sh "git commit #{podspec_path} -m 'Release #{spec.version}'"
   sh "git tag -a #{spec.version} -m 'Release #{spec.version}'"
   sh "git push origin master"
   sh "git push origin --tags"
