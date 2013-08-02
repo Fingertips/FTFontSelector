@@ -24,4 +24,3 @@ Pod::Spec.new do |s|
   s.resource     = 'Assets/FTFontSelector.bundle'
   s.public_header_files = 'Classes/*.h'
 end
-
