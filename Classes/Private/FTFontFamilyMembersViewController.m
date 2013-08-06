@@ -80,13 +80,25 @@ FTFontImageNamed(NSString *imageName)
 
 - (void)updateCheckMarkOfCell:(UITableViewCell *)cell selected:(BOOL)selected;
 {
+  // First always set the clear image, in case the delegate doesn't do anything.
+  // TODO really really need to fix this layout without an image :)
+  if (!selected) {
+    cell.imageView.image = FTFontImageNamed(@"CheckMark-Clear");
+    cell.imageView.highlightedImage = FTFontImageNamed(@"CheckMark-Clear");
+  }
+
+  id<FTFontSelectorControllerDelegate> delegate = self.fontSelectorController.fontDelegate;
+  SEL selector = @selector(fontSelectorController:changeCellSelection:selected:);
+  if (delegate && [delegate respondsToSelector:selector]) {
+    [delegate fontSelectorController:self.fontSelectorController
+                 changeCellSelection:cell
+                            selected:selected];
+    return;
+  }
+
   if (selected) {
     cell.imageView.image = FTFontImageNamed(@"CheckMark");
     cell.imageView.highlightedImage = FTFontImageNamed(@"CheckMark-White");
-  } else {
-    // lazy lulz
-    cell.imageView.image = FTFontImageNamed(@"CheckMark-Clear");
-    cell.imageView.highlightedImage = FTFontImageNamed(@"CheckMark-Clear");
   }
 }
 
@@ -138,6 +150,17 @@ FTFontImageNamed(NSString *imageName)
 {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
   [self changeSelectedFontToIndexPath:indexPath dismiss:self.dismissOnSelection];
+}
+
+- (void)tableView:(UITableView *)tableView
+  willDisplayCell:(UITableViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+  id<FTFontSelectorControllerDelegate> delegate = self.fontSelectorController.fontDelegate;
+  SEL selector = @selector(fontSelectorController:willDisplayTableViewCell:);
+  if (delegate && [delegate respondsToSelector:selector]) {
+    [delegate fontSelectorController:self.fontSelectorController willDisplayTableViewCell:cell];
+  }
 }
 
 @end

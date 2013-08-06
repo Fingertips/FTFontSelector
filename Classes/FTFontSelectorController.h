@@ -23,7 +23,7 @@
  This method is called in response to user-initiated font selection changes.
 
  @param controller The font selector controller who’s font selection has changed.
- @param fontName The **postscript** name of the newly selected font.
+ @param fontName   The **postscript** name of the newly selected font.
 */
 - (void)fontSelectorController:(FTFontSelectorController *)controller
      didChangeSelectedFontName:(NSString *)fontName;
@@ -40,6 +40,46 @@
  @param controller The font selector controller that should be dismissed.
 */
 - (void)fontSelectorControllerShouldBeDismissed:(FTFontSelectorController *)controller;
+
+@optional
+
+/// @name Managing cell appearance
+
+/**
+ Tells the delegate that a table view is about to draw a cell for a particular row.
+
+ A table view sends this message to its delegate just before it uses the cell to draw a row,
+ thereby permitting the delegate to customize the cell object before it is displayed. This method
+ gives the delegate a chance to override state-based properties set earlier by the font controller,
+ such as selection and background color.
+
+ @since 1.1.0
+
+ @param controller The font selector controller informing the delegate of this impending event.
+ @param cell       A cell that one of the table-views is going to use when drawing the row.
+*/
+- (void)fontSelectorController:(FTFontSelectorController *)controller
+      willDisplayTableViewCell:(UITableViewCell *)cell;
+
+/**
+ Tells the delegate that a table view is about to draw a selection change for a particular row.
+
+ A font selector sends this message to its delegate when the user (de)selects a row, thereby
+ permitting the delegate to customize what a (de)selected row looks like. Generally this will be
+ limited to the checkmark image that’s used to indicate row selection.
+
+ In reality this message is not only sent when the selection state changes, but also when the cell
+ is configured for the first time.
+
+ @since 1.1.0
+
+ @param controller The font selector controller informing the delegate of this impending event.
+ @param cell       The cell that has changed selection.
+ @param selected   Wether or not the cell is selected.
+*/
+- (void)fontSelectorController:(FTFontSelectorController *)controller
+           changeCellSelection:(UITableViewCell *)cell
+                      selected:(BOOL)selected;
 
 @end
 

@@ -1,6 +1,6 @@
 desc "Generate documentation"
 task :doc do
-  system "appledoc --project-name '#{spec.name}' --project-company 'Fingertips' --company-id com.fngtps --keep-undocumented-objects --keep-undocumented-members --no-create-docset --create-html --output Doc --index-desc README.md Classes/FTFontSelectorController.h"
+  system "appledoc --project-name FTFontSelector --project-company 'Fingertips' --company-id com.fngtps --keep-undocumented-objects --keep-undocumented-members --no-create-docset --create-html --output Doc --index-desc README.md Classes/FTFontSelectorController.h"
   system "open Doc/html/index.html"
 end
 
