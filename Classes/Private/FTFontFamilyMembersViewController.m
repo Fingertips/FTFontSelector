@@ -80,9 +80,11 @@ FTFontImageNamed(NSString *imageName)
 
 - (void)updateCheckMarkOfCell:(UITableViewCell *)cell selected:(BOOL)selected;
 {
-  // First always set the clear image, in case the delegate doesn't do anything.
   // TODO really really need to fix this layout without an image :)
-  if (!selected) {
+  if (selected) {
+    cell.imageView.image = FTFontImageNamed(@"CheckMark");
+    cell.imageView.highlightedImage = FTFontImageNamed(@"CheckMark-White");
+  } else {
     cell.imageView.image = FTFontImageNamed(@"CheckMark-Clear");
     cell.imageView.highlightedImage = FTFontImageNamed(@"CheckMark-Clear");
   }
@@ -93,12 +95,6 @@ FTFontImageNamed(NSString *imageName)
     [delegate fontSelectorController:self.fontSelectorController
                  changeCellSelection:cell
                             selected:selected];
-    return;
-  }
-
-  if (selected) {
-    cell.imageView.image = FTFontImageNamed(@"CheckMark");
-    cell.imageView.highlightedImage = FTFontImageNamed(@"CheckMark-White");
   }
 }
 
