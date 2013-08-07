@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'FTFontSelector'
-  s.version      = '1.1.0'
+  s.version      = '1.1.1'
   s.summary      = 'A clone of the font selector found in Apple’s iOS Pages app.'
   s.description  = <<-DESC
                     FTFontSelector implements a clone of the font selector that
