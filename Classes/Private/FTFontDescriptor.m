@@ -11,15 +11,20 @@
 
 + (NSArray *)fontFamilies;
 {
-  NSArray *displayNames = [UIFont familyNames];
+  static __strong NSArray *_fontFamilies;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    NSArray *displayNames = [UIFont familyNames];
   displayNames = [displayNames sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-  NSMutableArray *families = [NSMutableArray arrayWithCapacity:displayNames.count];
-  for (NSString *displayName in displayNames) {
-    [families addObject:[[FTFontDescriptor alloc] initWithPostscriptName:nil
-                                                             displayName:displayName
-                                                           familyMembers:nil]];
-  }
-  return [families copy];
+    NSMutableArray *families = [NSMutableArray arrayWithCapacity:displayNames.count];
+    for (NSString *displayName in displayNames) {
+      [families addObject:[[FTFontDescriptor alloc] initWithPostscriptName:nil
+                                                               displayName:displayName
+                                                             familyMembers:nil]];
+    }
+    _fontFamilies = [families copy];
+  });
+  return _fontFamilies;
 }
 
 @synthesize postscriptName = _postscriptName;
