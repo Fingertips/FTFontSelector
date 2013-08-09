@@ -15,7 +15,7 @@
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     NSArray *displayNames = [UIFont familyNames];
-  displayNames = [displayNames sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    displayNames = [displayNames sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     NSMutableArray *families = [NSMutableArray arrayWithCapacity:displayNames.count];
     for (NSString *displayName in displayNames) {
       [families addObject:[[FTFontDescriptor alloc] initWithPostscriptName:nil
