@@ -52,7 +52,7 @@
 {
   if (_postscriptName == nil) {
     NSParameterAssert(self.displayName);
-    _postscriptName = [[UIFont fontWithName:self.displayName size:0] fontName];
+    _postscriptName = [[UIFont fontWithName:self.displayName size:1] fontName];
   }
   return _postscriptName;
 }
