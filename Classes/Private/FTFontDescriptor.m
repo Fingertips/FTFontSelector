@@ -36,7 +36,7 @@
   if ((self = [self initWithPostscriptName:postscriptName
                                displayName:displayName
                              familyMembers:nil])) {
-    _familyMembers = @[self];
+    _familyMembers = @[[NSValue valueWithNonretainedObject:self]];
   }
   return self;
 }
@@ -76,7 +76,13 @@
 
 - (instancetype)descriptorWithPostscriptName:(NSString *)postscriptName;
 {
-  for (FTFontDescriptor *descriptor in self.familyMembers) {
+  for (id entry in self.familyMembers) {
+    FTFontDescriptor *descriptor = nil;
+    if ([entry isKindOfClass:[NSValue class]]) {
+      descriptor = [(NSValue *)entry nonretainedObjectValue];
+    } else {
+      descriptor = entry;
+    }
     if ([descriptor.postscriptName isEqualToString:postscriptName]) {
       return descriptor;
     }
